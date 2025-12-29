@@ -7,14 +7,14 @@ services:
       args:
         url_docker: ${url_docker_index}
     environment:
-      - NGINX_PORT_HTTP=80
-      - NGINX_PORT_HTTPS=443
-      - APP0_PORT=8000
-      - APP1_PORT=8001
-      - APP2_PORT=8002
+      - NGINX_PORT_HTTP=${NGINX_PORT_HTTP}
+      - NGINX_PORT_HTTPS=${NGINX_PORT_HTTPS}
+      - APP0_PORT=${APP0_PORT}
+      - APP1_PORT=${APP1_PORT}
+      - APP2_PORT=${APP2_PORT}
     ports:
-      - "80:80"
-      - "443:443"
+      - "${NGINX_PORT_HTTP}:${NGINX_PORT_HTTP}"
+      - "${NGINX_PORT_HTTPS}:${NGINX_PORT_HTTPS}"
     volumes:
       - ./src-nginx/templates:/etc/nginx/templates
       - ./src-nginx/certs:/etc/nginx/certs:ro
@@ -43,6 +43,7 @@ services:
       - app_net
     volumes:
       - datashare:/datashare
+      - datalogs:/datalogs
     entrypoint:
       - /bin/bash
       - entrypoint.sh
@@ -68,6 +69,7 @@ services:
       - app_net
     volumes:
       - datashare:/datashare
+      - datalogs:/datalogs
     entrypoint:
       - /bin/bash
       - entrypoint.sh

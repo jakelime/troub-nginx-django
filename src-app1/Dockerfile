@@ -9,3 +9,5 @@ WORKDIR /app
 COPY ./main ./
 COPY ./requirements.txt ./requirements.txt
 RUN pip install --index-url ${URL_PYPI_INDEX} -r requirements.txt
+
+RUN mkdir -p /datalogs/app1/
