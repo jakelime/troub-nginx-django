@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -63,8 +66,8 @@ MIDDLEWARE = [
 CORS_ALLOW_ALL_ORIGINS = True
 
 NINJA_JWT = {
-    'ACCESS_TOKEN_LIFETIME': 3600,
-    'REFRESH_TOKEN_LIFETIME': 86400,
+    "ACCESS_TOKEN_LIFETIME": 3600,
+    "REFRESH_TOKEN_LIFETIME": 86400,
 }
 
 ROOT_URLCONF = "main.urls"
@@ -145,8 +148,8 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-STATIC_URL = "/static/"
-_STATIC_ROOT = os.getenv("STATIC_ROOT_PATH", "/datashare/www/static")
+STATIC_URL = os.getenv("STATIC_URL", "/static/")
+_STATIC_ROOT = os.getenv("STATIC_ROOT_PATH", "~/datashare/www/static")
 if _STATIC_ROOT:
     static_root = Path(_STATIC_ROOT).expanduser()
     try:
